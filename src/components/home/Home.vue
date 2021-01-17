@@ -2,23 +2,27 @@
   <div>
     <h1 class="centralizado">{{ titulo }}</h1>
 
-    <input 
-      type="search" 
-      class="filtro" 
-      @input="filtro = $event.target.value" 
+    <input
+      type="search"
+      class="filtro"
+      @input="filtro = $event.target.value"
       placeholder="Filtre pelo título"
     >
-  
+
     <ul class="lista-fotos">
-      <li 
-        class="lista-fotos-item" 
+      <li
+        class="lista-fotos-item"
         v-for="foto in fotosComFiltro"
+        :key="foto"
       >
 
         <meu-painel :titulo="foto.titulo">
-          <imagem-responsiva :url="foto.url" :titulo="foto.titulo" />
-          <meu-botao 
-            tipo="button" 
+          <imagem-responsiva
+            v-meu-transform="{ incremento: 30, animate: true }"
+            :url="foto.url"
+            :titulo="foto.titulo" />
+          <meu-botao
+            tipo="button"
             rotulo="REMOVER"
             @botaoAtivado="remove(foto)"
             :confirmacao="true"
@@ -53,7 +57,7 @@ export default {
     this.$http.get('http://localhost:3000/v1/fotos')
       .then(res => res.json())
       .then(fotos => this.fotos = fotos, err => console.log(err))
-  }, 
+  },
   methods: {
     remove(foto) {
       alert('Remover foto: ' + foto.titulo)
@@ -76,7 +80,7 @@ export default {
   .centralizado {
     text-align: center;
   }
-  
+
   .lista-fotos {
     list-style: none;
   }
