@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="centralizado">{{ titulo }}</h1>
+    <h1 class="centralizado" v-meu-transform.animate.reverse>{{ titulo }}</h1>
 
     <input
       type="search"
@@ -18,7 +18,7 @@
 
         <meu-painel :titulo="foto.titulo">
           <imagem-responsiva
-            v-meu-transform="{ incremento: 30, animate: true }"
+            v-meu-transform.animate="30"
             :url="foto.url"
             :titulo="foto.titulo" />
           <meu-botao
